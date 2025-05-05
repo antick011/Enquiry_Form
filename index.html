@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Auto Popup Enquiry with Background</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      height: 100vh;
+      background-color: #f8f9fa;
+      background-image: url(webel\ konnagar.png); /* 🔁 Replace with your actual image path */
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 1040px 300px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Modal -->
+  <div class="modal fade" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title" id="enquiryModalLabel">Send Your Enquiry</h5>
+        </div>
+        <div class="modal-body">
+          <form onsubmit="redirectToWhatsApp(event)">
+            <div class="mb-3">
+              <label for="name" class="form-label"><i class="fas fa-user"></i> Your Name</label>
+              <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label"><i class="fas fa-map-marker-alt"></i> Address</label>
+              <input type="text" id="address" class="form-control" placeholder="City, State" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label"><i class="fas fa-comment-dots"></i> Enquiry</label>
+              <textarea id="message" class="form-control" rows="3" placeholder="Type your enquiry here..." required></textarea>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-success"><i class="fab fa-whatsapp"></i> Submit via WhatsApp</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function redirectToWhatsApp(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const address = document.getElementById('address').value;
+      const message = document.getElementById('message').value;
+      const fullMessage = `Name: ${name}!\nFrom: ${address}\nEnquiry: ${message}`;
+      const encodedMessage = encodeURIComponent(fullMessage);
+      const phoneNumber = '+917890160170';
+      const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+      window.open(whatsappURL, '_blank');
+    }
+
+    // Auto-show modal on page load
+    window.addEventListener('load', () => {
+      const enquiryModal = new bootstrap.Modal(document.getElementById('enquiryModal'));
+      enquiryModal.show();
+    });
+  </script>
+</body>
+</html>

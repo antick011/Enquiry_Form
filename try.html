@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Google Sheet Form</title>
+</head>
+<body>
+  <h2>Enquiry Form</h2>
+  <form id="enquiry-form">
+    <label>Name: <input type="text" name="name" required></label><br>
+    <label>Number: <input type="text" name="number" required></label><br>
+    <label>Address: <input type="text" name="address" required></label><br>
+    <label>Enquiry: <textarea name="enquiry" required></textarea></label><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="response"></p>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzCdAXAF3scJgBJYriqVkwywm-1h4UnH1i2GSLudheQo9p5eV2KfzWhlSAnu2B__GWe/exec';
+    const form = document.getElementById('enquiry-form');
+    const response = document.getElementById('response');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors' // Use no-cors to bypass CORS issues
+      })
+      .then(() => {
+        response.innerText = "Submitted successfully!";
+        form.reset();
+      })
+      .catch(error => {
+        response.innerText = "Error occurred!";
+        console.error('Error!', error.message);
+      });
+    });
+  </script>
+</body>
+</html>
