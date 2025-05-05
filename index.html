@@ -10,14 +10,23 @@
     body {
       height: 100vh;
       background-color: #f8f9fa;
-      background-image: url(webel\ konnagar.png); /* 🔁 Replace with your actual image path */
+      background-image: url('webel konnagar.png'); /* Replace with your actual image path */
       background-repeat: no-repeat;
       background-position: center center;
-      background-size: 1040px 300px;
+      background-size: cover; /* Makes the image responsive and cover the entire body */
+    }
+
+    /* Optional: You can add a media query for more control on smaller screens */
+    @media (max-width: 768px) {
+      body {
+        background-size: contain; /* Ensures the image fits within the viewport on smaller screens */
+        background-position: center center;
+      }
     }
   </style>
 </head>
 <body>
+
   <!-- Modal -->
   <div class="modal fade" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
